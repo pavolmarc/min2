@@ -17,7 +17,7 @@ public class GraphController {
     @CrossOrigin(origins = "http://localhost:3000")
     public String data() throws IOException {
         System.out.println("==== get string ====");
-        Graph graph = new Graph("https://data.korona.gov.sk/api/hospital-patients");
+        Graph graph = new Graph("https://data.korona.gov.sk/api/hospital-patients/by-region");
         String information = graph.data;
         return information;
     }
