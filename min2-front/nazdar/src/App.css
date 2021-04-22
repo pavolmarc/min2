@@ -4,46 +4,47 @@
 }
 
 .about{
-  height: 500px;
+  height: 750px;
   background-color: white;
+  background-image: url(Images/logo.png);
 }
 
 .ba{
   height: 500px;
-  background-color: lightyellow;
+  background-color: #FFF7DF;
 }
 
 .ta{
   height: 500px;
-  background-color: lightsalmon;
+  background-color: #FFE5D6;
 }
 
 .tc{
   height: 500px;
-  background-color:tomato;
+  background-color:#FEDEDC;
 }
 
 .ni{
   height: 500px;
-  background-color: lightpink;
+  background-color: #FFE2F3 ;
 }
 
 .zi{
   height: 500px;
-  background-color: plum;
+  background-color:#F5DBFF;
 }
 
 .bb{
   height: 500px;
-  background-color:lightskyblue;
+  background-color:#E5F7FF;
 }
 
 .po{
   height: 500px;
-  background-color:lightblue;
+  background-color:#E6EAFF;
 }
 
 .ke{
   height: 500px;
-  background-color: lightgreen;
+  background-color:#E2FFDE;
 }

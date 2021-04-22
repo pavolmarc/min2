@@ -1,75 +1,96 @@
 import { useState } from "react";
-import { Switch, Route } from "react-router-dom";
 import "./App.css";
-import Navigation from "./Components/Navigation";
+import logo from './Images/logo.png'
 import HttpGet from "./http.js";
 
 function App() {
   const [currentRegion, setCurrentRegion] = useState("ba");
-
-  const click = (region) => {
+  const [activeTab, setActiveTab] = useState("bratislava");
+ 
+  const click = (region, id) => {
+    setActiveTab(id);
     setCurrentRegion(region);
   };
+
   return (
     <div className="App">
+      <div className="topnav">
+      <img className="logo" src={logo} alt="logo"/>
       <button
+        className={activeTab === "trnava" ? "activeTa" : "normal"}
+        id="trnava"
         onClick={() => {
-          click("ta");
+          click("ta", "trnava");
         }}
       >
         Trnava
       </button>
       <button
+        className={activeTab === "bratislava" ? "activeBa" : "normal"}
+        id="bratislava"
         onClick={() => {
-          click("ba");
+          click("ba", "bratislava");
         }}
       >
         Bratislava
       </button>
       <button
+        className={activeTab === "trencin" ? "activeTc" : "normal"}
+        id="trencin"
         onClick={() => {
-          click("tc");
+          click("tc", "trencin");
         }}
       >
         Trencin
       </button>
       <button
+        className={activeTab === "bystrica" ? "activeBb" : "normal"}
+        id="bystrica"
         onClick={() => {
-          click("bb");
+          click("bb", "bystrica");
         }}
       >
         Banska
       </button>
       <button
+        className={activeTab === "presov" ? "activePo" : "normal"}
+        id="presov"
         onClick={() => {
-          click("po");
+          click("po", "presov");
         }}
       >
         Presov
       </button>
       <button
+        className={activeTab === "kosice" ? "activeKe" : "normal"}
+        id="kosice"
         onClick={() => {
-          click("ke");
+          click("ke", "kosice");
         }}
       >
         Kosice
       </button>
       <button
+        className={activeTab === "nitra" ? "activeNi" : "normal"}
+        id="nitra"
         onClick={() => {
-          click("ni");
+          click("ni", "nitra");
         }}
       >
         Nitra
       </button>
       <button
+        className={activeTab === "zilina" ? "activeZi" : "normal"}
+        id="zilina"
         onClick={() => {
-          click("zi");
+          click("zi", "zilina");
         }}
       >
         Zilina
       </button>
+      </div>
       <HttpGet county={currentRegion} />
-      {/* <Navigation /> */}
+
       {/* <Switch>
         <Route exact path="/ba">
           <HttpGet county="ba"/>

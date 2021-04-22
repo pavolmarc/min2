@@ -1,7 +1,6 @@
 import axios from "axios";
 import Plotly from "plotly.js-dist";
 import React, { useState, useEffect } from "react";
-import ReactJson from "react-json-view";
 
 const HttpGet = (county) => {
   const [data, setData] = useState({ jason: "krason" });
@@ -9,6 +8,7 @@ const HttpGet = (county) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [region, setRegion] = useState();
   const [countyState, setCountyState] = useState(county);
+  const [showingAttribute, setShowingAttribute] = useState("confirmed");
 
   if (countyState !== county) {
     setCountyState(county);
@@ -53,17 +53,26 @@ const HttpGet = (county) => {
   useEffect(() => {
     if (isLoaded) {
       let GraphMap = new Map();
-
       jsonData.page.map((key) => {
-        var keyValue = key.newest_reported_at;
+        var keyName = key.newest_reported_at.split(" ")[0];
+        var keyValue = 0;
+        switch (showingAttribute) {
+          case "confirmed":
+            keyValue = key.confirmed_covid;
+            break;
+          case "ventilated":
+            keyValue = key.ventilated_covid;
+            break;
+          case "non":
+            keyValue = key.non_covid;
+            break;
+        }
+
         if (key.region_id === region) {
-          if (GraphMap.has(keyValue)) {
-            GraphMap.set(
-              keyValue,
-              GraphMap.get(keyValue) + key.confirmed_covid
-            );
+          if (GraphMap.has(keyName)) {
+            GraphMap.set(keyName, GraphMap.get(keyName) + keyValue);
           } else {
-            GraphMap.set(keyValue, key.confirmed_covid);
+            GraphMap.set(keyName, keyValue);
           }
         }
       });
@@ -75,16 +84,51 @@ const HttpGet = (county) => {
           type: "bar",
         },
       ];
-
-      Plotly.newPlot(county.county, data);
+      var layout = {
+        plot_bgcolor: "#333",
+        paper_bgcolor: "#333",
+        font: {
+          color: 'white'
+        }
+      };
+      Plotly.newPlot(county.county, data, layout);
     }
-  }, [jsonData]);
+  }, [jsonData, showingAttribute]);
 
   return (
-    <div>
-      <div className={county.county} id={county.county}></div>
-      {/* <div id={county}></div> */}
-      <ReactJson src={data} name="http-test" collapsed={1} />
+    <div className={county.county}>
+      <h1>{county.county}</h1>
+      <div>
+        <button
+        className={showingAttribute === "confirmed" ? "active" : "nonActive"}
+          onClick={() => {
+            setShowingAttribute("confirmed");
+          }}
+        >
+          Confirmed-covid
+        </button>
+        <button
+        className={showingAttribute === "non" ? "active" : "nonActive"}
+          onClick={() => {
+            setShowingAttribute("non");
+          }}
+        >
+          Non-covid
+        </button>
+        <button
+        className={showingAttribute === "ventilated" ? "active" : "nonActive"}
+          onClick={() => {
+            setShowingAttribute("ventilated");
+          }}
+        >
+          Ventilated-covid
+        </button>
+      </div>
+      <div
+        className={county.county}
+        id={county.county}
+      ></div>
+      {/* <ReactJson src={data} name="http-test" collapsed={1} /> */}
     </div>
   );
 };

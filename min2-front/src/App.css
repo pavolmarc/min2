@@ -1,6 +1,7 @@
 .App {
   margin: 0;
   text-align: center;
+  background-color: #333;
 }
 
 .about{
@@ -46,4 +47,72 @@
 .ke{
   height: 500px;
   background-color: lightgreen;
+}
+
+
+.topnav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+  height: 50px;
+  width: vw;
+}
+
+.topnav img {
+    height: 100%;
+    float: left;
+}
+
+.topnav button {
+  height: 100%;
+  width: 12%;
+  background-color: transparent;
+  padding-top: 6px;
+  text-align: center;
+  float: left;
+}
+
+
+.normal{
+  color: grey;
+
+}
+.active{
+  color: white;
+  background-color: #333;
+  font-weight: 600;
+}
+.activeBa {
+  color: #FFC300;
+  font-weight: 600;
+}
+.activeTa {
+  color: #FF5A00;
+  font-weight: 600;
+}
+.activeTc {
+  color: #FF0F00;
+  font-weight: 600;
+}
+.activeNi {
+  color: #FF009A;
+  font-weight: 600;
+}
+.activeZi {
+  color: #BC00FF;
+  font-weight: 600;
+}
+.activeBb {
+  color: #00ACFF;
+  font-weight: 600;
+}
+.activePo {
+  color: #002DFF;
+  font-weight: 600;
+}
+.activeKe {
+  color: #17C000;
+  font-weight: 600;
 }

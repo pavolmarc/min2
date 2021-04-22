@@ -7,31 +7,34 @@ function App() {
     <div className="App">
       <Navigation />
       <Switch>
-      <Route exact path='/ba'>
-        <div className='ba'></div>
+      <Route exact path='/'>
+        <div className='about'></div>
       </Route>
-      <Route exact path='/ta'>
+      <Route path='/ba'>
+        <div className='ba' ></div>
+      </Route>
+      <Route path='/ta'>
         <div className='ta'></div>
       </Route>
-      <Route exact path='/tc'>
+      <Route path='/tc'>
         <div className='tc'></div>
       </Route>
-      <Route exact path='/ni'>
+      <Route path='/ni'>
         <div className='ni'></div>
       </Route>
-      <Route exact path='/zi'>
+      <Route path='/zi'>
         <div className='zi'></div>
       </Route>
-      <Route exact path='/bb'>
+      <Route path='/bb'>
         <div className='bb'></div>
       </Route>
-      <Route exact path='/po'>
+      <Route path='/po'>
         <div className='po'></div>
       </Route>
-      <Route exact path='/ke'>
+      <Route path='/ke'>
         <div className='ke'></div>
       </Route>
-      <Route exact path='/about'>
+      <Route path='/about'>
         <div className='about'></div>
       </Route>
       </Switch>

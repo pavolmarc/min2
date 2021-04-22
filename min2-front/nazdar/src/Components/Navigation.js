@@ -1,42 +1,42 @@
 import React from 'react'
 import './Navigation.css'
 import logo from '../Images/logo.png'
-import { Link } from 'react-router-dom'
+import { NavLink} from 'react-router-dom'
 
 function Navigation() {
     return (
       <div className="Navigation">
         <ul class="topnav">
-          <Link to='/about'>
+          <NavLink to='/'>
           <img className="logo" src={logo} alt="logo"/>
-          </Link>
-          <Link to='/ba'>
-          <li style={{backgroundColor: "yellow"}}>Bratislavský</li>
-          </Link>
-          <Link to='/ta'>
-          <li style={{backgroundColor: "orange"}}>Trnavský</li>
-          </Link>
-          <Link to='/tc'>
-          <li style={{backgroundColor: "red"}}>Trenčiansky</li>
-          </Link>
-          <Link to='/ni'>
-          <li style={{backgroundColor: "pink"}}>Nitriansky</li>
-          </Link>
-          <Link to='/zi'>
-          <li style={{backgroundColor: "blueviolet"}}>Žilinský</li>
-          </Link>
-          <Link to='/bb'>
-          <li style={{backgroundColor: "blue"}}>Banskobystrický</li>
-          </Link>
-          <Link to='/po'>
-          <li style={{backgroundColor: "darkblue"}}>Prešovský</li>
-          </Link>
-          <Link to='/ke'>
-          <li style={{backgroundColor: "green"}}>Košický</li>
-          </Link>
-          <Link to='/about'>
+          </NavLink>
+          <NavLink to='/ba' className="normal" activeClassName="activeBa">
+          <li>Bratislavský</li>
+          </NavLink>
+          <NavLink to='/ta' className="normal" activeClassName="activeTa">
+          <li>Trnavský</li>
+          </NavLink>
+          <NavLink to='/tc' className="normal" activeClassName="activeTc">
+          <li>Trenčiansky</li>
+          </NavLink>
+          <NavLink to='/ni' className="normal" activeClassName="activeNi">
+          <li>Nitriansky</li>
+          </NavLink>
+          <NavLink to='/zi' className="normal" activeClassName="activeZi">
+          <li>Žilinský</li>
+          </NavLink>
+          <NavLink to='/bb' className="normal" activeClassName="activeBb">
+          <li>Banskobystrický</li>
+          </NavLink>
+          <NavLink to='/po' className="normal" activeClassName="activePo">
+          <li>Prešovský</li>
+          </NavLink>
+          <NavLink to='/ke' className="normal" activeClassName="activeKe">
+          <li>Košický</li>
+          </NavLink>
+          <NavLink to='/about' className="normal" activeClassName="active">
           <li class="right">About</li>
-          </Link>
+          </NavLink>
         </ul>
       </div>
     );

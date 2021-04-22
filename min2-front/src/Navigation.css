@@ -13,8 +13,8 @@ ul.topnav {
       float: left;
   }
   
-  ul.topnav li {
-    height: 40px;
+  ul.topnav button {
+    height: 100%;
     width: 10%;
     padding-top: 10px;
     text-align: center;
@@ -24,7 +24,7 @@ ul.topnav {
   ul.topnav li.right {float: right;}
 
   .normal{
-    color: white;
+    color: grey;
   }
   .active{
     color: white;
