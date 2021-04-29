@@ -1,10 +1,10 @@
 .App {
   margin: 0;
   text-align: center;
-  background-color: #333;
+  background-color: #0078B8;
 }
 
-.about{
+/* .about{
   height: 500px;
   background-color: white;
 }
@@ -47,7 +47,7 @@
 .ke{
   height: 500px;
   background-color: lightgreen;
-}
+} */
 
 
 .topnav {
@@ -55,7 +55,7 @@
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #333;
+  background-color: #0078B8;
   height: 50px;
   width: vw;
 }

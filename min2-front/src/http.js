@@ -82,13 +82,17 @@ const HttpGet = (county) => {
           x: Array.from(GraphMap.keys()),
           y: Array.from(GraphMap.values()),
           type: "bar",
+          marker: {
+            color: 'green'
+          }
         },
       ];
       var layout = {
-        plot_bgcolor: "#333",
-        paper_bgcolor: "#333",
+        plot_bgcolor: "rgb(255, 255, 255)",
+        paper_bgcolor: "rgb(255, 255, 255)",
         font: {
-          color: 'white'
+          color: 'black',
+          size: 10
         }
       };
       Plotly.newPlot(county.county, data, layout);
