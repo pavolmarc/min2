@@ -3,12 +3,13 @@ import Plotly from "plotly.js-dist";
 import React, { useState, useEffect } from "react";
 
 const HttpGet = (county) => {
-  const [data, setData] = useState({ jason: "krason" });
   const [jsonData, setJsonData] = useState();
   const [isLoaded, setIsLoaded] = useState(false);
   const [region, setRegion] = useState();
   const [countyState, setCountyState] = useState(county);
   const [showingAttribute, setShowingAttribute] = useState("confirmed");
+  const [color, setColor] = useState("blue");
+  const [title, setTitle] = useState("Klikni na kraj");
 
   if (countyState !== county) {
     setCountyState(county);
@@ -16,36 +17,51 @@ const HttpGet = (county) => {
 
   useEffect(() => {
     axios.get("http://localhost:8080/graph").then((res) => {
-      var string = res.data;
       setIsLoaded(true);
       setJsonData(res.data);
-      setData(string);
     });
 
     switch (county.county) {
       case "ba":
         setRegion(3);
+        setColor("#FFDD6E");
+        setTitle("Bratislavský kraj");
         break;
       case "ta":
         setRegion(7);
+        setTitle("Trnavský kraj");
+        setColor("#FF9A58");
         break;
       case "tc":
         setRegion(4);
+        setTitle("Trenčianský kraj");
+        setColor("#FF5959");
         break;
       case "ni":
         setRegion(2);
+        setTitle("Nitrianský kraj");
+        setColor("#FF78CA");
         break;
       case "zi":
         setRegion(5);
+        setTitle("Žilinský kraj");
+        setColor("#DA74FF");
+
         break;
       case "bb":
         setRegion(6);
+        setColor("#76D2FF");
+        setTitle("Banskobystrický kraj");
         break;
       case "po":
         setRegion(8);
+        setColor("#768EFF");
+        setTitle("Prešovský kraj");
         break;
       case "ke":
         setRegion(1);
+        setTitle("Košický kraj");
+        setColor("#76D46A");
         break;
     }
   }, [countyState]);
@@ -83,28 +99,29 @@ const HttpGet = (county) => {
           y: Array.from(GraphMap.values()),
           type: "bar",
           marker: {
-            color: 'green'
-          }
+            color: color,
+          },
         },
       ];
       var layout = {
         plot_bgcolor: "rgb(255, 255, 255)",
         paper_bgcolor: "rgb(255, 255, 255)",
         font: {
-          color: 'black',
-          size: 10
-        }
+          color: "black",
+          size: 10,
+        },
       };
       Plotly.newPlot(county.county, data, layout);
     }
   }, [jsonData, showingAttribute]);
 
   return (
-    <div className={county.county}>
-      <h1>{county.county}</h1>
-      <div>
+    <div>
+      <h1>{title}</h1>
+
+      <div className="differentMenu">
         <button
-        className={showingAttribute === "confirmed" ? "active" : "nonActive"}
+          className={showingAttribute === "confirmed" ? "active" : "nonActive"}
           onClick={() => {
             setShowingAttribute("confirmed");
           }}
@@ -112,7 +129,7 @@ const HttpGet = (county) => {
           Confirmed-covid
         </button>
         <button
-        className={showingAttribute === "non" ? "active" : "nonActive"}
+          className={showingAttribute === "non" ? "active" : "nonActive"}
           onClick={() => {
             setShowingAttribute("non");
           }}
@@ -120,7 +137,7 @@ const HttpGet = (county) => {
           Non-covid
         </button>
         <button
-        className={showingAttribute === "ventilated" ? "active" : "nonActive"}
+          className={showingAttribute === "ventilated" ? "active" : "nonActive"}
           onClick={() => {
             setShowingAttribute("ventilated");
           }}
@@ -128,11 +145,14 @@ const HttpGet = (county) => {
           Ventilated-covid
         </button>
       </div>
-      <div
-        className={county.county}
-        id={county.county}
-      ></div>
-      {/* <ReactJson src={data} name="http-test" collapsed={1} /> */}
+      <div className="twoColumns">
+        <div className="leftColumn">
+          <h1>Hi</h1>
+        </div>
+        <div className="rightColumn">
+          <div className={county.county} id={county.county}></div>
+        </div>
+      </div>
     </div>
   );
 };

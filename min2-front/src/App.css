@@ -1,68 +1,22 @@
 .App {
   margin: 0;
   text-align: center;
-  background-color: #0078B8;
-}
-
-/* .about{
-  height: 500px;
   background-color: white;
 }
-
-.ba{
-  height: 500px;
-  background-color: lightyellow;
-}
-
-.ta{
-  height: 500px;
-  background-color: lightsalmon;
-}
-
-.tc{
-  height: 500px;
-  background-color:tomato;
-}
-
-.ni{
-  height: 500px;
-  background-color: lightpink;
-}
-
-.zi{
-  height: 500px;
-  background-color: plum;
-}
-
-.bb{
-  height: 500px;
-  background-color:lightskyblue;
-}
-
-.po{
-  height: 500px;
-  background-color:lightblue;
-}
-
-.ke{
-  height: 500px;
-  background-color: lightgreen;
-} */
-
 
 .topnav {
   list-style-type: none;
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #0078B8;
+  background-color: #0078b8;
   height: 50px;
   width: vw;
 }
 
 .topnav img {
-    height: 100%;
-    float: left;
+  height: 100%;
+  float: left;
 }
 
 .topnav button {
@@ -74,45 +28,32 @@
   float: left;
 }
 
-
-.normal{
+.normal {
   color: grey;
-
 }
-.active{
+.active {
   color: white;
   background-color: #333;
   font-weight: 600;
 }
-.activeBa {
-  color: #FFC300;
-  font-weight: 600;
+.Button {
+  background-color: #0078b8 !important ;
 }
-.activeTa {
-  color: #FF5A00;
-  font-weight: 600;
+.ButtonGroup {
+  background-color: #0078b8 !important ;
 }
-.activeTc {
-  color: #FF0F00;
-  font-weight: 600;
+.MuiAppBar-root {
+  background-color: #0078b8 !important;
 }
-.activeNi {
-  color: #FF009A;
-  font-weight: 600;
+
+.twoColumns {
+  display: flex;
 }
-.activeZi {
-  color: #BC00FF;
-  font-weight: 600;
+
+.leftColumn{
+  width: 30%;
+
 }
-.activeBb {
-  color: #00ACFF;
-  font-weight: 600;
-}
-.activePo {
-  color: #002DFF;
-  font-weight: 600;
-}
-.activeKe {
-  color: #17C000;
-  font-weight: 600;
+.rightColumn{
+  width: 70%;
 }

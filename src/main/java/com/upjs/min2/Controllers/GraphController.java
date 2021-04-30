@@ -1,7 +1,6 @@
 package com.upjs.min2.Controllers;
 
 import com.upjs.min2.Classes.Graph;
-import org.json.JSONObject;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 
