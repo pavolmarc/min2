@@ -30,19 +30,6 @@ function Navigation({ click, activeTab }) {
         aria-label="contained primary button group"
       >
         <img className="logo" src={logo} alt="logo" />
-
-        <Button
-          to="/ta"
-          component={NavLink}
-          className={activeTab === "trnava" ? "activeTa" : "normal"}
-          id="trnava"
-          onClick={() => {
-            click("ta", "trnava");
-          }}
-        >
-          Trnavský
-        </Button>
-
         <Button
           to="/ba"
           component={NavLink}
@@ -55,6 +42,17 @@ function Navigation({ click, activeTab }) {
           Bratislavský
         </Button>
         <Button
+          to="/ta"
+          component={NavLink}
+          className={activeTab === "trnava" ? "activeTa" : "normal"}
+          id="trnava"
+          onClick={() => {
+            click("ta", "trnava");
+          }}
+        >
+          Trnavský
+        </Button>
+        <Button
           to="/tc"
           component={NavLink}
           className={activeTab === "trencin" ? "activeTc" : "normal"}
@@ -64,6 +62,28 @@ function Navigation({ click, activeTab }) {
           }}
         >
           Trenčiansky
+        </Button>
+        <Button
+          to="/ni"
+          component={NavLink}
+          className={activeTab === "nitra" ? "activeNi" : "normal"}
+          id="nitra"
+          onClick={() => {
+            click("ni", "nitra");
+          }}
+        >
+          Nitriansky
+        </Button>
+        <Button
+          to="/zi"
+          component={NavLink}
+          className={activeTab === "zilina" ? "activeZi" : "normal"}
+          id="zilina"
+          onClick={() => {
+            click("zi", "zilina");
+          }}
+        >
+          Žilinský
         </Button>
         <Button
           to="/bb"
@@ -97,28 +117,6 @@ function Navigation({ click, activeTab }) {
           }}
         >
           Košický
-        </Button>
-        <Button
-          to="/ni"
-          component={NavLink}
-          className={activeTab === "nitra" ? "activeNi" : "normal"}
-          id="nitra"
-          onClick={() => {
-            click("ni", "nitra");
-          }}
-        >
-          Nitriansky
-        </Button>
-        <Button
-          to="/zi"
-          component={NavLink}
-          className={activeTab === "zilina" ? "activeZi" : "normal"}
-          id="zilina"
-          onClick={() => {
-            click("zi", "zilina");
-          }}
-        >
-          Žilinský
         </Button>
       </ButtonGroup>
     </div>

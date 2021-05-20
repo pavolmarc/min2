@@ -1,5 +1,7 @@
 import axios from "axios";
 import Plotly from "plotly.js-dist";
+import { Button } from "@material-ui/core";
+import ButtonGroup from "@material-ui/core/ButtonGroup";
 import React, { useState, useEffect } from "react";
 
 const HttpGet = (county) => {
@@ -117,34 +119,40 @@ const HttpGet = (county) => {
 
   return (
     <div>
-      <h1>{title}</h1>
-
       <div className="differentMenu">
-        <button
+        <ButtonGroup
+          fullWidth="true"
+          variant="contained"
+          color="primary"
+          aria-label="contained primary button group"
+        >
+        <Button
           className={showingAttribute === "confirmed" ? "active" : "nonActive"}
           onClick={() => {
             setShowingAttribute("confirmed");
           }}
         >
           Confirmed-covid
-        </button>
-        <button
+        </Button>
+        <Button
           className={showingAttribute === "non" ? "active" : "nonActive"}
           onClick={() => {
             setShowingAttribute("non");
           }}
         >
           Non-covid
-        </button>
-        <button
+        </Button>
+        <Button
           className={showingAttribute === "ventilated" ? "active" : "nonActive"}
           onClick={() => {
             setShowingAttribute("ventilated");
           }}
         >
           Ventilated-covid
-        </button>
+        </Button>
+      </ButtonGroup>
       </div>
+      <h1>{title}</h1>
       <div className="twoColumns">
         <div className="leftColumn">
           <h1>Hi</h1>
