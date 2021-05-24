@@ -3,6 +3,7 @@ import Plotly from "plotly.js-dist";
 import { Button } from "@material-ui/core";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import React, { useState, useEffect } from "react";
+import ReactJson from "react-json-view";
 
 const HttpGet = (county) => {
   const [jsonData, setJsonData] = useState();
@@ -12,6 +13,10 @@ const HttpGet = (county) => {
   const [showingAttribute, setShowingAttribute] = useState("confirmed");
   const [color, setColor] = useState("blue");
   const [title, setTitle] = useState("Klikni na kraj");
+  const [update, setUpdate] = useState("Loading...");
+  const [sum, setSum] = useState(0);
+  const [medianArray, setMedianArray] = useState([]);
+  const [median, setMedian] = useState(0);
 
   if (countyState !== county) {
     setCountyState(county);
@@ -70,6 +75,17 @@ const HttpGet = (county) => {
 
   useEffect(() => {
     if (isLoaded) {
+      let sum = 0;
+      let array = [];
+      for (let index = 0; index < 7; index++) {
+        array[index] = jsonData.page[index * region].confirmed_covid;
+        sum += jsonData.page[index * region].confirmed_covid;
+      }
+      array.sort(function (a, b) {
+        return a - b;
+      });
+      setMedian(array[3]);
+      setSum(Math.floor(sum / 7));
       let GraphMap = new Map();
       jsonData.page.map((key) => {
         var keyName = key.newest_reported_at.split(" ")[0];
@@ -114,6 +130,13 @@ const HttpGet = (county) => {
         },
       };
       Plotly.newPlot(county.county, data, layout);
+
+      setUpdate(
+        <div>
+          Posledný stav nemocnice ({jsonData.page[0].newest_reported_at}):
+          {jsonData.page[region].confirmed_covid}
+        </div>
+      );
     }
   }, [jsonData, showingAttribute]);
 
@@ -126,36 +149,43 @@ const HttpGet = (county) => {
           color="primary"
           aria-label="contained primary button group"
         >
-        <Button
-          className={showingAttribute === "confirmed" ? "active" : "nonActive"}
-          onClick={() => {
-            setShowingAttribute("confirmed");
-          }}
-        >
-          Confirmed-covid
-        </Button>
-        <Button
-          className={showingAttribute === "non" ? "active" : "nonActive"}
-          onClick={() => {
-            setShowingAttribute("non");
-          }}
-        >
-          Non-covid
-        </Button>
-        <Button
-          className={showingAttribute === "ventilated" ? "active" : "nonActive"}
-          onClick={() => {
-            setShowingAttribute("ventilated");
-          }}
-        >
-          Ventilated-covid
-        </Button>
-      </ButtonGroup>
+          <Button
+            className={
+              showingAttribute === "confirmed" ? "active" : "nonActive"
+            }
+            onClick={() => {
+              setShowingAttribute("confirmed");
+            }}
+          >
+            Confirmed-covid
+          </Button>
+          <Button
+            className={showingAttribute === "non" ? "active" : "nonActive"}
+            onClick={() => {
+              setShowingAttribute("non");
+            }}
+          >
+            Non-covid
+          </Button>
+          <Button
+            className={
+              showingAttribute === "ventilated" ? "active" : "nonActive"
+            }
+            onClick={() => {
+              setShowingAttribute("ventilated");
+            }}
+          >
+            Ventilated-covid
+          </Button>
+        </ButtonGroup>
       </div>
       <h1>{title}</h1>
       <div className="twoColumns">
         <div className="leftColumn">
-          <h1>Hi</h1>
+          <h1>{showingAttribute}</h1>
+          {isLoaded && update}7 dňový priemer: {sum}
+          <br></br>
+          Kĺzavý medián: {median} <br></br>
         </div>
         <div className="rightColumn">
           <div className={county.county} id={county.county}></div>
