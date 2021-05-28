@@ -150,8 +150,8 @@ const HttpGet = (county) => {
         if (jsonData.page[i].region_id === region) {
           setActualState(
             <div>
-              Posledný stav nemocnice
-              <br></br>({jsonData.page[0].newest_reported_at}):
+              <b>Posledný stav nemocnice
+              <br></br>({jsonData.page[0].newest_reported_at})</b>
               <br></br>
               {showingAttribute === "confirmed_covid" && (
                 <div>
