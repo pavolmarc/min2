@@ -156,6 +156,7 @@ const HttpGet = (county) => {
               {showingAttribute === "confirmed_covid" && (
                 <div>
                   Potvrdený covid pacienti:
+                  <br></br>
                   <b> {jsonData.page[i].confirmed_covid}</b>
                   <br></br>
                 </div>
@@ -163,13 +164,16 @@ const HttpGet = (county) => {
               {showingAttribute === "ventilated_covid" && (
                 <div>
                   Pacienti na ventilácii:
+                  <br></br>
                   <b> {jsonData.page[i].ventilated_covid}</b>
                   <br></br>
                 </div>
               )}
               {showingAttribute === "non_covid" && (
                 <div>
-                  Non-covid pacienti: <b>{jsonData.page[i].non_covid}</b>
+                  Non-covid pacienti: 
+                  <br></br>
+                  <b>{jsonData.page[i].non_covid}</b>
                   <br></br>
                 </div>
               )}
@@ -224,7 +228,7 @@ const HttpGet = (county) => {
       <h1>{title}</h1>
       <div className="twoColumns">
         <div className="leftColumn">
-          <h2>Aktuálne informácie ({showingAttribute})</h2>
+          <h2>Aktuálne informácie</h2>
           {isLoaded && actualState}7 dňový priemer:
           <br></br>
           <b>{sum}</b>

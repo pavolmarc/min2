@@ -3,24 +3,8 @@ import logo from "../Images/logo.png";
 import { NavLink } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
-import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 
 function Navigation({ click, activeTab }) {
-  const theme = createMuiTheme({
-    overrides: {
-      // Style sheet name ⚛️
-      MuiButtonGroup: {
-        // Name of the rule
-        MuiButton: {
-          text: {
-            // Some CSS
-            color: "green",
-          },
-        },
-      },
-    },
-  });
-
   return (
     <div>
       <ButtonGroup
