@@ -133,8 +133,10 @@ const HttpGet = (county) => {
 
       setUpdate(
         <div>
-          Posledný stav nemocnice ({jsonData.page[0].newest_reported_at}):
-          {jsonData.page[region].confirmed_covid}
+          Posledný stav nemocnice 
+          <br></br>({jsonData.page[0].newest_reported_at}):
+          <br></br>
+          <b>{jsonData.page[region].confirmed_covid}</b>
         </div>
       );
     }
@@ -182,10 +184,13 @@ const HttpGet = (county) => {
       <h1>{title}</h1>
       <div className="twoColumns">
         <div className="leftColumn">
-          <h1>{showingAttribute}</h1>
-          {isLoaded && update}7 dňový priemer: {sum}
+          <h2>Aktuálne informácie</h2>
+          {isLoaded && update}
+          7 dňový priemer: 
+          <br></br><b>{sum}</b>
           <br></br>
-          Kĺzavý medián: {median} <br></br>
+          Kĺzavý medián:
+          <br></br> <b>{median}</b> <br></br>
         </div>
         <div className="rightColumn">
           <div className={county.county} id={county.county}></div>
