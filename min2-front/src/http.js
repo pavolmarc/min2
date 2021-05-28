@@ -153,16 +153,30 @@ const HttpGet = (county) => {
               Posledný stav nemocnice
               <br></br>({jsonData.page[0].newest_reported_at}):
               <br></br>
-              Potvrdený covid pacienti:<b> {jsonData.page[i].confirmed_covid}</b>
-              <br></br>
-              Pacienti na ventilácii:<b> {jsonData.page[i].ventilated_covid}</b>
-              <br></br>
-              Non-covid pacienti: <b>{jsonData.page[i].non_covid}</b>
+              {showingAttribute === "confirmed_covid" && (
+                <div>
+                  Potvrdený covid pacienti:
+                  <b> {jsonData.page[i].confirmed_covid}</b>
+                  <br></br>
+                </div>
+              )}
+              {showingAttribute === "ventilated_covid" && (
+                <div>
+                  Pacienti na ventilácii:
+                  <b> {jsonData.page[i].ventilated_covid}</b>
+                  <br></br>
+                </div>
+              )}
+              {showingAttribute === "non_covid" && (
+                <div>
+                  Non-covid pacienti: <b>{jsonData.page[i].non_covid}</b>
+                  <br></br>
+                </div>
+              )}
             </div>
           );
         }
       }
-    
     }
   }, [jsonData, showingAttribute]);
 
