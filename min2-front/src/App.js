@@ -5,8 +5,8 @@ import Navigation from "./Components/Navigation";
 import { createMuiTheme, ThemeProvider} from "@material-ui/core/styles";
 
 function App() {
-  const [currentRegion, setCurrentRegion] = useState("ta");
-  const [activeTab, setActiveTab] = useState("trnava");
+  const [currentRegion, setCurrentRegion] = useState("ke");
+  const [activeTab, setActiveTab] = useState("kosice");
 
   const click = (region, id) => {
     setActiveTab(id);
