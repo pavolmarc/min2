@@ -10,13 +10,13 @@ const HttpGet = (county) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [region, setRegion] = useState();
   const [countyState, setCountyState] = useState(county);
-  const [showingAttribute, setShowingAttribute] = useState("confirmed");
+  const [showingAttribute, setShowingAttribute] = useState("confirmed_covid");
   const [color, setColor] = useState("blue");
   const [title, setTitle] = useState("Klikni na kraj");
   const [update, setUpdate] = useState("Loading...");
   const [sum, setSum] = useState(0);
-  const [medianArray, setMedianArray] = useState([]);
   const [median, setMedian] = useState(0);
+  const [actualState, setActualState] = useState(0);
 
   if (countyState !== county) {
     setCountyState(county);
@@ -77,27 +77,42 @@ const HttpGet = (county) => {
     if (isLoaded) {
       let sum = 0;
       let array = [];
-      for (let index = 0; index < 7; index++) {
-        array[index] = jsonData.page[index * region].confirmed_covid;
-        sum += jsonData.page[index * region].confirmed_covid;
+      for (let index = 0; index < 54; index++) {
+        if (showingAttribute === "confirmed_covid") {
+          if (jsonData.page[index].region_id === region) {
+            array[index] = jsonData.page[index].confirmed_covid;
+            sum += jsonData.page[index].confirmed_covid;
+          }
+        } else if (showingAttribute === "ventilated_covid") {
+          if (jsonData.page[index].region_id === region) {
+            array[index] = jsonData.page[index].ventilated_covid;
+            sum += jsonData.page[index].ventilated_covid;
+          }
+        } else if (showingAttribute === "non_covid") {
+          if (jsonData.page[index].region_id === region) {
+            array[index] = jsonData.page[index].non_covid;
+            sum += jsonData.page[index].non_covid;
+          }
+        }
       }
       array.sort(function (a, b) {
         return a - b;
       });
       setMedian(array[3]);
       setSum(Math.floor(sum / 7));
+
       let GraphMap = new Map();
       jsonData.page.map((key) => {
         var keyName = key.newest_reported_at.split(" ")[0];
         var keyValue = 0;
         switch (showingAttribute) {
-          case "confirmed":
+          case "confirmed_covid":
             keyValue = key.confirmed_covid;
             break;
-          case "ventilated":
+          case "ventilated_covid":
             keyValue = key.ventilated_covid;
             break;
-          case "non":
+          case "non_covid":
             keyValue = key.non_covid;
             break;
         }
@@ -131,14 +146,23 @@ const HttpGet = (county) => {
       };
       Plotly.newPlot(county.county, data, layout);
 
-      setUpdate(
-        <div>
-          Posledný stav nemocnice 
-          <br></br>({jsonData.page[0].newest_reported_at}):
-          <br></br>
-          <b>{jsonData.page[region].confirmed_covid}</b>
-        </div>
-      );
+      for (let i = 0; i < 7; i++) {
+        if (jsonData.page[i].region_id === region) {
+          setActualState(
+            <div>
+              Posledný stav nemocnice
+              <br></br>({jsonData.page[0].newest_reported_at}):
+              <br></br>
+              Potvrdený covid pacienti:<b> {jsonData.page[i].confirmed_covid}</b>
+              <br></br>
+              Pacienti na ventilácii:<b> {jsonData.page[i].ventilated_covid}</b>
+              <br></br>
+              Non-covid pacienti: <b>{jsonData.page[i].non_covid}</b>
+            </div>
+          );
+        }
+      }
+    
     }
   }, [jsonData, showingAttribute]);
 
@@ -153,28 +177,30 @@ const HttpGet = (county) => {
         >
           <Button
             className={
-              showingAttribute === "confirmed" ? "active" : "nonActive"
+              showingAttribute === "confirmed_covid" ? "active" : "nonActive"
             }
             onClick={() => {
-              setShowingAttribute("confirmed");
+              setShowingAttribute("confirmed_covid");
             }}
           >
             Confirmed-covid
           </Button>
           <Button
-            className={showingAttribute === "non" ? "active" : "nonActive"}
+            className={
+              showingAttribute === "non_covid" ? "active" : "nonActive"
+            }
             onClick={() => {
-              setShowingAttribute("non");
+              setShowingAttribute("non_covid");
             }}
           >
             Non-covid
           </Button>
           <Button
             className={
-              showingAttribute === "ventilated" ? "active" : "nonActive"
+              showingAttribute === "ventilated_covid" ? "active" : "nonActive"
             }
             onClick={() => {
-              setShowingAttribute("ventilated");
+              setShowingAttribute("ventilated_covid");
             }}
           >
             Ventilated-covid
@@ -184,12 +210,12 @@ const HttpGet = (county) => {
       <h1>{title}</h1>
       <div className="twoColumns">
         <div className="leftColumn">
-          <h2>Aktuálne informácie</h2>
-          {isLoaded && update}
-          7 dňový priemer: 
-          <br></br><b>{sum}</b>
+          <h2>Aktuálne informácie ({showingAttribute})</h2>
+          {isLoaded && actualState}7 dňový priemer:
           <br></br>
-          Kĺzavý medián:
+          <b>{sum}</b>
+          <br></br>
+          Kĺzavý medián (7 dní):
           <br></br> <b>{median}</b> <br></br>
         </div>
         <div className="rightColumn">
